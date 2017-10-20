@@ -12,3 +12,7 @@ Looks like we have tasks for weeks ahead. So let's start with basic user-facing 
 I choose Phoenix for this app, as it has channels for our real-time functionality and it suites regular web app requirements as well.
 For the front end, I choose React.js.
 We will provide site owners with a small javascript script, which will create an iframe on their pages and load our user-facing react app in this iframe. The react app will communicate with our Phoenix back end via a channel. We will not build standard REST API for our front end, as we can pass all the required data in a channel both ways. We can build REST API later if we will need to expose it to other parties.
+
+As I don't have extensive experience setting up React apps (I used Rails-generated webpack config for react) I've created our react app with [create-react-app](https://github.com/facebookincubator/create-react-app)
+
+I've set up basic Phoenix app with `mix phx.new combox --no-html --no-brunch` because we will use it only as a back end.
