@@ -16,3 +16,19 @@ We will provide site owners with a small javascript script, which will create an
 As I don't have extensive experience setting up React apps (I used Rails-generated webpack config for react) I've created our react app with [create-react-app](https://github.com/facebookincubator/create-react-app)
 
 I've set up basic Phoenix app with `mix phx.new combox --no-html --no-brunch` because we will use it only as a back end.
+
+_October 22, 2017_
+
+We will start with an anonymous visitor accessing our app. React app will connect to Phoenix via WebSocket and get a state of the current page.
+
+To distinguish pages to comment on we need a model for pages. But I prefer to call it a Subject because we might want comments not only on pages in the future. Subjects belong to some Resource (in case of pages it is a website), which in turn belongs to a User (website owner), who embedded our app.
+
+So I will create:
+
+- User model
+- Resource model, which has many Subjects and belongs to a User
+- Subject model, which is identified by URL and belongs to a Resource
+
+This data model does not include any groups/organizations to group resources. This model also does not allow to set up additional administrators/moderators for a resource. I did it intentionally - to be able to try how to remodel and migrate data with Ecto migrations.
+
+Now when we have Subjects we can create our Comment model. It belongs to a Subject, may belong to a User, may have a parent Comment, must have a message, may have anonymous user name and email, must have a votes balance.
