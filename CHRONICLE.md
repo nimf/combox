@@ -32,3 +32,7 @@ So I will create:
 This data model does not include any groups/organizations to group resources. This model also does not allow to set up additional administrators/moderators for a resource. I did it intentionally - to be able to try how to remodel and migrate data with Ecto migrations.
 
 Now when we have Subjects we can create our Comment model. It belongs to a Subject, may belong to a User, may have a parent Comment, must have a message, may have anonymous user name and email, must have a votes balance.
+
+_October 26, 2017_
+
+I created a channel for communication with front end react app. I was in need of a quick test of my design, that's why it only allows posting new comments as an anonymous user for now. I also added ex_machina for fixtures and created minimal tests for the Comment schema and SubjectChannel.
