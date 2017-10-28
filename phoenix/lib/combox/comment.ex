@@ -7,7 +7,7 @@ defmodule Combox.Comment do
   schema "comments" do
     field :email, :string
     field :message, :string
-    field :name, :string
+    field :name, :string, default: "Anonymous"
     field :votes_balance, :integer
 
     belongs_to :subject, Subject
@@ -21,6 +21,7 @@ defmodule Combox.Comment do
   def changeset(%Comment{} = comment, attrs) do
     comment
     |> cast(attrs, [:message, :name, :email, :votes_balance])
-    |> validate_required([:message, :name, :email, :votes_balance])
+    |> validate_required([:message, :subject_id])
+    |> assoc_constraint(:subject)
   end
 end

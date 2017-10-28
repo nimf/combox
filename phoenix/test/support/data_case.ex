@@ -22,6 +22,7 @@ defmodule Combox.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Combox.DataCase
+      import Combox.Factory
     end
   end
 
