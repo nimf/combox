@@ -36,3 +36,8 @@ Now when we have Subjects we can create our Comment model. It belongs to a Subje
 _October 26, 2017_
 
 I created a channel for communication with front end react app. I was in need of a quick test of my design, that's why it only allows posting new comments as an anonymous user for now. I also added ex_machina for fixtures and created minimal tests for the Comment schema and SubjectChannel.
+
+_October 27, 2017_
+
+Now we need react app to connect to a Phoenix channel and post a comment via this channel.
+I added phoenix library for working with phoenix sockets and channels, redux and redux-thunk for managing app state and async actions, and semantic-ui for ui elements. I also configured a proxy for a websocket to Phoenix app (in production environment we will do it on our load-balancing servers).
