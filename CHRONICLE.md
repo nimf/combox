@@ -41,3 +41,5 @@ _October 27, 2017_
 
 Now we need react app to connect to a Phoenix channel and post a comment via this channel.
 I added phoenix library for working with phoenix sockets and channels, redux and redux-thunk for managing app state and async actions, and semantic-ui for ui elements. I also configured a proxy for a websocket to Phoenix app (in production environment we will do it on our load-balancing servers).
+
+I also added dependencies for linting and testing.
