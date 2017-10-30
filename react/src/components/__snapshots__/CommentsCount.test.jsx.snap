@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentsCount renders CommentsCount renders 1 count 1`] = `
+<h4
+  className="ui header"
+>
+  1 comment
+</h4>
+`;
+
+exports[`CommentsCount renders CommentsCount renders 2 count 1`] = `
+<h4
+  className="ui header"
+>
+  2 comments
+</h4>
+`;
+
+exports[`CommentsCount renders CommentsCount renders undefined count 1`] = `
+<h4
+  className="ui header"
+>
+  Loading comments...
+</h4>
+`;
+
+exports[`CommentsCount renders CommentsCount renders zero count 1`] = `
+<h4
+  className="ui header"
+>
+  No comments yet
+</h4>
+`;

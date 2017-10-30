@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentBox renders renders disabled with disabled button 1`] = `
+<form
+  action={undefined}
+  className="ui form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <textarea
+      content={undefined}
+      disabled={undefined}
+      onChange={[Function]}
+      onInput={[Function]}
+      placeholder="Leave a comment..."
+      required={undefined}
+      rows={2}
+      style={
+        Object {
+          "resize": "none",
+        }
+      }
+      type={undefined}
+      value="Test comment"
+    />
+  </div>
+  <button
+    className="ui icon primary disabled left labeled button"
+    disabled={true}
+    onClick={[Function]}
+    role="button"
+    tabIndex={-1}
+  >
+    <i
+      aria-hidden="true"
+      className="edit icon"
+    />
+    Add Comment
+  </button>
+</form>
+`;
+
+exports[`CommentBox renders renders with text with enabled button 1`] = `
+<form
+  action={undefined}
+  className="ui form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <textarea
+      content={undefined}
+      disabled={undefined}
+      onChange={[Function]}
+      onInput={[Function]}
+      placeholder="Leave a comment..."
+      required={undefined}
+      rows={2}
+      style={
+        Object {
+          "resize": "none",
+        }
+      }
+      type={undefined}
+      value="Test comment"
+    />
+  </div>
+  <button
+    className="ui icon primary left labeled button"
+    disabled={undefined}
+    onClick={[Function]}
+    role="button"
+    tabIndex={undefined}
+  >
+    <i
+      aria-hidden="true"
+      className="edit icon"
+    />
+    Add Comment
+  </button>
+</form>
+`;
+
+exports[`CommentBox renders renders without text with disabled button 1`] = `
+<form
+  action={undefined}
+  className="ui form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <textarea
+      content={undefined}
+      disabled={undefined}
+      onChange={[Function]}
+      onInput={[Function]}
+      placeholder="Leave a comment..."
+      required={undefined}
+      rows={2}
+      style={
+        Object {
+          "resize": "none",
+        }
+      }
+      type={undefined}
+      value=""
+    />
+  </div>
+  <button
+    className="ui icon primary disabled left labeled button"
+    disabled={true}
+    onClick={[Function]}
+    role="button"
+    tabIndex={-1}
+  >
+    <i
+      aria-hidden="true"
+      className="edit icon"
+    />
+    Add Comment
+  </button>
+</form>
+`;
