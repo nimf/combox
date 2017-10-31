@@ -51,3 +51,5 @@ _October 30, 2017_
 
 Now we need react app to display comments. When a user joins a SubjectChannel we reply with subject id and comments count, I have added comments as well.
 You may notice that CommentViewTest duplicates the logic of CommentView and regularly it is a bad practice with leads to brittle tests. But in our case, it is critical that we pass comments through a channel using this format. If we change it without changing the receiving front end part - the app will break. So this test will alert us in case someone will be changing comment JSON representation.
+
+On the react side I have added comments to a subject state and I fill it when we get subject info.

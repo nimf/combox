@@ -14,7 +14,7 @@ function connectToSocket(dispatch) {
 
   channel.join().receive('ok', (response) => {
     dispatch({ type: 'CONNECT_SUCCESSFUL', channel });
-    dispatch({ type: 'SUBJECT_INFO_LOADED', subject: response.subject });
+    dispatch({ type: 'SUBJECT_INFO_LOADED', response });
   }).receive('error', () => {
     dispatch({ type: 'DISCONNECTED' });
   });
