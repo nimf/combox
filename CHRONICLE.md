@@ -53,3 +53,6 @@ Now we need react app to display comments. When a user joins a SubjectChannel we
 You may notice that CommentViewTest duplicates the logic of CommentView and regularly it is a bad practice with leads to brittle tests. But in our case, it is critical that we pass comments through a channel using this format. If we change it without changing the receiving front end part - the app will break. So this test will alert us in case someone will be changing comment JSON representation.
 
 On the react side I have added comments to a subject state and I fill it when we get subject info.
+Since we will have threaded comments, I created CommentsTree and CommentNode components.
+CommentNode will render a comment itself.
+CommentsTree will render all comments for some parent comment (or root comments). It will render each comment as CommentNode with CommentsTree for a comment as a child.

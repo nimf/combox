@@ -51,6 +51,173 @@ exports[`App renders correctly 1`] = `
         Add Comment
       </button>
     </form>
+    <div
+      className="ui threaded comments"
+    >
+      <div
+        className="comment"
+      >
+        <a
+          className="avatar"
+        >
+          <img
+            src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=100"
+          />
+        </a>
+        <div
+          className="content"
+        >
+          <span
+            className="author"
+          >
+            <span>
+              Anonymous
+            </span>
+            <div
+              className="ui mini label"
+              onClick={[Function]}
+            >
+              Guest
+            </div>
+          </span>
+          <div
+            className="metadata"
+          >
+            <div
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              3 days ago
+            </div>
+          </div>
+          <div
+            className="text"
+          >
+            <p>
+              Test comment 1
+            </p>
+          </div>
+          <div
+            className="actions"
+          >
+            Reply
+          </div>
+        </div>
+        <div
+          className="ui comments"
+        >
+          <div
+            className="comment"
+          >
+            <a
+              className="avatar"
+            >
+              <img
+                src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=100"
+              />
+            </a>
+            <div
+              className="content"
+            >
+              <span
+                className="author"
+              >
+                <span>
+                  Anonymous
+                </span>
+                <div
+                  className="ui mini label"
+                  onClick={[Function]}
+                >
+                  Guest
+                </div>
+              </span>
+              <div
+                className="metadata"
+              >
+                <div
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  2 days ago
+                </div>
+              </div>
+              <div
+                className="text"
+              >
+                <p>
+                  Test comment 2
+                </p>
+              </div>
+              <div
+                className="actions"
+              >
+                Reply
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="comment"
+      >
+        <a
+          className="avatar"
+        >
+          <img
+            src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=100"
+          />
+        </a>
+        <div
+          className="content"
+        >
+          <span
+            className="author"
+          >
+            <span>
+              Anonymous
+            </span>
+            <div
+              className="ui mini label"
+              onClick={[Function]}
+            >
+              Guest
+            </div>
+          </span>
+          <div
+            className="metadata"
+          >
+            <div
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              a day ago
+            </div>
+          </div>
+          <div
+            className="text"
+          >
+            <p>
+              Test comment 3
+            </p>
+          </div>
+          <div
+            className="actions"
+          >
+            Reply
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

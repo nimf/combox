@@ -2,3 +2,10 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+.author .ui.mini.label {
+  top: -0.2em;
+  position: relative;
+  padding: .6em .833em .4em;
+  margin-left: .8em;
+}

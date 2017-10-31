@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "moment": "^2.19.1",
     "phoenix": "file:../phoenix/deps/phoenix",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",

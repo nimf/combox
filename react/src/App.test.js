@@ -4,6 +4,8 @@ import renderer from 'react-test-renderer';
 import { App } from './App';
 import CommentBox from './components/CommentBox';
 import CommentsCount from './components/CommentsCount';
+import CommentsTree from './components/CommentsTree';
+import commentsFixture from './fixtures/comments';
 
 test('App renders correctly', () => {
   const tree = renderer.create(<App
@@ -11,6 +13,7 @@ test('App renders correctly', () => {
     saveDraft={() => {}}
     postComment={() => {}}
     channelConnected={false}
+    comments={commentsFixture}
   />).toJSON();
   expect(tree).toMatchSnapshot();
 });
@@ -24,6 +27,7 @@ describe('App Shallow Render', () => {
       saveDraft={() => {}}
       postComment={() => {}}
       channelConnected={false}
+      comments={{ byId: {}, allIds: [] }}
     />);
   });
 
@@ -31,8 +35,9 @@ describe('App Shallow Render', () => {
     expect(wrapper.length).toEqual(1);
   });
 
-  it('renders CommentsCount and CommentBox', () => {
+  it('renders CommentsCount, CommentBox and CommentsTree', () => {
     expect(wrapper.find(CommentsCount).length).toEqual(1);
     expect(wrapper.find(CommentBox).length).toEqual(1);
+    expect(wrapper.find(CommentsTree).length).toEqual(1);
   });
 });

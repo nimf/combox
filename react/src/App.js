@@ -6,6 +6,7 @@ import { connectToChannel } from './actions/channel';
 import { saveDraft, postComment } from './actions/subject';
 import CommentBox from './components/CommentBox';
 import CommentsCount from './components/CommentsCount';
+import CommentsTree from './components/CommentsTree';
 import './App.css';
 
 const propTypes = {
@@ -17,6 +18,7 @@ const propTypes = {
   channel: PropTypes.object,
   commentsCount: PropTypes.number,
   draftComment: PropTypes.string,
+  comments: PropTypes.object.isRequired,
 };
 const defaultProps = {
   channel: undefined,
@@ -53,6 +55,7 @@ export class App extends Component {
             onChange={this.onSaveDraft}
             onSubmit={this.onPostComment}
           />
+          <CommentsTree comments={this.props.comments} />
         </Segment>
       </div>
     );
@@ -68,6 +71,7 @@ export default connect(
     commentsCount: state.subject.commentsCount,
     draftComment: state.subject.draftComment,
     displayName: state.user.displayName,
+    comments: state.subject.comments,
   }),
   { connectToChannel, saveDraft, postComment },
 )(App);
