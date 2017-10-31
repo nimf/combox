@@ -1,15 +1,15 @@
 defmodule ComboxWeb.SubjectChannelTest do
   use ComboxWeb.ChannelCase
 
-  alias ComboxWeb.SubjectChannel
+  alias ComboxWeb.{SubjectChannel, CommentView}
 
   setup do
-    insert(:subject, %{url: "some.url/articles/1"})
+    subject = insert(:subject)
     {:ok, _, socket} =
       socket("user_id", %{some: :assign})
-      |> subscribe_and_join(SubjectChannel, "subject:some.url/articles/1")
+      |> subscribe_and_join(SubjectChannel, "subject:" <> subject.url)
 
-    {:ok, socket: socket}
+    {:ok, socket: socket, subject: subject}
   end
 
   test "not existing subject returns no such subject" do
@@ -18,11 +18,16 @@ defmodule ComboxWeb.SubjectChannelTest do
       |> subscribe_and_join(SubjectChannel, "subject:some.url/articles/0")
   end
 
-  test "existing subject returns subject info" do
+  test "existing subject returns subject info and comments",
+    %{subject: subject} do
+    comment = insert(:comment, %{subject: subject})
     assert {:ok, reply, _socket} =
       socket("user_id", %{some: :assign})
-      |> subscribe_and_join(SubjectChannel, "subject:some.url/articles/1")
-    assert %{subject: %{comments_count: 0}} = reply
+      |> subscribe_and_join(SubjectChannel, "subject:" <> subject.url)
+
+    assert %{subject: %{comments_count: 0, id: subject.id}, comments:
+      Phoenix.View.render_many([comment], CommentView, "comment.json")
+    } == reply
   end
 
   test "broadcasts are pushed to the client", %{socket: socket} do

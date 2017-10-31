@@ -8,7 +8,7 @@ defmodule Combox.Comment do
     field :email, :string
     field :message, :string
     field :name, :string, default: "Anonymous"
-    field :votes_balance, :integer
+    field :votes_balance, :integer, default: 0
 
     belongs_to :subject, Subject
     belongs_to :user, User

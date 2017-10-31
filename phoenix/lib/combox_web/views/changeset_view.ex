@@ -1,4 +1,4 @@
-defmodule Combox.ChangesetView do
+defmodule ComboxWeb.ChangesetView do
   use ComboxWeb, :view
   alias Ecto.Changeset
 

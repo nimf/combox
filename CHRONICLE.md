@@ -46,3 +46,8 @@ I also added dependencies for linting and testing.
 
 I created CommentBox component where users can add their comments and CommentsCount component to display comments count. The main App component renders these two components. When App component is mounted it calls connectToChannel action, which connects to Phoenix socket and joins a channel for a subject. When joining a channel succeeds, we get subject id and comments count from Phoenix app. CommentBox component saves what user typed in the textarea to the localStorage associating the draft with subject id. When textarea is not empty and channel is connected, CommentBox enables "Add Comment" button. When it is clicked CommentBox calls postComment action, which pushed `post_comment` event to the channel. Then on success textarea gets cleared (later we will also add scroll effect to the created comment). On error we do nothing yet, we will add a notification later. We have some `console.log` here and there, I will also clean them up later.
 There are also some minimal tests (unfortunately I had problems setting up Phoenix socket mock with Fauxnix). I like snapshot tests as they allow to quickly test the whole component look.
+
+_October 30, 2017_
+
+Now we need react app to display comments. When a user joins a SubjectChannel we reply with subject id and comments count, I have added comments as well.
+You may notice that CommentViewTest duplicates the logic of CommentView and regularly it is a bad practice with leads to brittle tests. But in our case, it is critical that we pass comments through a channel using this format. If we change it without changing the receiving front end part - the app will break. So this test will alert us in case someone will be changing comment JSON representation.
