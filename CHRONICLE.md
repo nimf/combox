@@ -81,3 +81,5 @@ On the back end, we check parent_id parameter and verify that the Comment exists
 We didn't touched comments count yet. I've added `prepare_changes` to `Comment.changeset` to update subject's comment count.
 
 We will not pass comments count with every new comment to the front end. Because it gets all the comments and can increment count by itself. Thus I just added incrementing of comment count to `NEW_OWN_COMMENT` and `NEW_COMMENT` in the reducer.
+
+Added seeds and readme.
