@@ -42,7 +42,7 @@ defmodule ComboxWeb.SubjectChannel do
     changeset =
       socket.assigns.subject
       |> Ecto.build_assoc(:comments, user_id: socket.assigns[:user_id])
-      |> Comment.changeset(params)
+      |> Comment.changeset_for_insert(params)
       |> put_change(:parent_id, parent_id)
 
     case Repo.insert(changeset) do

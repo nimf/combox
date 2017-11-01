@@ -18,11 +18,16 @@ defmodule Combox.Comment do
   end
 
   @doc false
-  def changeset(%Comment{} = comment, attrs) do
+  def changeset_for_insert(%Comment{} = comment, attrs) do
     comment
     |> cast(attrs, [:message, :name, :email, :votes_balance])
     |> validate_required([:message, :subject_id])
     |> assoc_constraint(:subject)
     |> assoc_constraint(:parent)
+    |> prepare_changes(fn changeset ->
+      Ecto.assoc(changeset.data, :subject)
+      |> changeset.repo.update_all(inc: [comments_count: 1])
+      changeset
+    end)
   end
 end

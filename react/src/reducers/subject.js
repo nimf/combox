@@ -86,6 +86,7 @@ export default function (state = initialState, action) {
       clearDraft(state.id);
       return {
         ...state,
+        commentsCount: state.commentsCount + 1,
         draftComment: '',
         comments: {
           ...state.comments,
@@ -103,6 +104,7 @@ export default function (state = initialState, action) {
     case 'NEW_COMMENT':
       return {
         ...state,
+        commentsCount: state.commentsCount + 1,
         comments: {
           ...state.comments,
           byId: {

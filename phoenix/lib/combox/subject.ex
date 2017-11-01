@@ -7,7 +7,7 @@ defmodule Combox.Subject do
   schema "subjects" do
     field :title, :string
     field :url, :string
-    field :comments_count, :integer
+    field :comments_count, :integer, default: 0
 
     belongs_to :resource, Resource
     has_many :comments, Comment

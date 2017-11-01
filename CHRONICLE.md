@@ -77,3 +77,7 @@ Now we need to make our Reply buttons work. I've added reply form to CommentNode
 And when posting a reply comment succeeds we clear reply form and hide it in `NEW_OWN_COMMENT` reducer.
 
 On the back end, we check parent_id parameter and verify that the Comment exists and belongs to the same Subject.
+
+We didn't touched comments count yet. I've added `prepare_changes` to `Comment.changeset` to update subject's comment count.
+
+We will not pass comments count with every new comment to the front end. Because it gets all the comments and can increment count by itself. Thus I just added incrementing of comment count to `NEW_OWN_COMMENT` and `NEW_COMMENT` in the reducer.
