@@ -19,6 +19,7 @@ const renderComment = comment =>
       comments={commentsFixture}
       currentCommentId={comment.id}
       onFocusedRendered={() => {}}
+      onOpenNewComments={() => {}}
     />
   </CommentNode>).toJSON();
 

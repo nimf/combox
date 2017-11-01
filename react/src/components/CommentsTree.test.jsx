@@ -8,6 +8,7 @@ describe('CommentsTree renders', () => {
     const tree = renderer.create(<CommentsTree
       comments={commentsFixture}
       onFocusedRendered={() => {}}
+      onOpenNewComments={() => {}}
     />).toJSON();
     expect(tree).toMatchSnapshot();
   });

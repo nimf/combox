@@ -12,6 +12,7 @@ test('App renders correctly', () => {
     connectToChannel={() => {}}
     saveDraft={() => {}}
     postComment={() => {}}
+    openNewComments={() => {}}
     focusComment={() => {}}
     channelConnected={false}
     comments={commentsFixture}
@@ -27,6 +28,7 @@ describe('App Shallow Render', () => {
       connectToChannel={() => {}}
       saveDraft={() => {}}
       postComment={() => {}}
+      openNewComments={() => {}}
       focusComment={() => {}}
       channelConnected={false}
       comments={{ byId: {}, allIds: [] }}

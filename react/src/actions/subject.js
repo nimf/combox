@@ -27,3 +27,9 @@ export function focusComment(commentId) {
     }, 1000);
   };
 }
+
+export function openNewComments(commentId) {
+  return (dispatch) => {
+    dispatch({ type: 'OPEN_NEW_COMMENTS', commentId });
+  };
+}

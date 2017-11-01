@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
 import 'scroll-behaviour/polyfill';
 import { connectToChannel } from './actions/channel';
-import { saveDraft, postComment, focusComment } from './actions/subject';
+import {
+  saveDraft, postComment, focusComment, openNewComments,
+} from './actions/subject';
 import CommentBox from './components/CommentBox';
 import CommentsCount from './components/CommentsCount';
 import CommentsTree from './components/CommentsTree';
@@ -15,6 +17,7 @@ const propTypes = {
   saveDraft: PropTypes.func.isRequired,
   postComment: PropTypes.func.isRequired,
   focusComment: PropTypes.func.isRequired,
+  openNewComments: PropTypes.func.isRequired,
   channelConnected: PropTypes.bool.isRequired,
   displayName: PropTypes.string,
   channel: PropTypes.object,
@@ -50,6 +53,10 @@ export class App extends Component {
     this.props.focusComment(this.props.comments.focusedId);
   }
 
+  onOpenNewComments = (commentId) => {
+    this.props.openNewComments(commentId);
+  }
+
   render() {
     return (
       <div className="App">
@@ -64,6 +71,7 @@ export class App extends Component {
           <CommentsTree
             comments={this.props.comments}
             onFocusedRendered={this.onFocusedRendered}
+            onOpenNewComments={this.onOpenNewComments}
           />
         </Segment>
       </div>
@@ -83,6 +91,6 @@ export default connect(
     comments: state.subject.comments,
   }),
   {
-    connectToChannel, saveDraft, postComment, focusComment,
+    connectToChannel, saveDraft, postComment, focusComment, openNewComments,
   },
 )(App);

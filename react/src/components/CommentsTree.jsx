@@ -7,6 +7,7 @@ const propTypes = {
   comments: PropTypes.object.isRequired,
   currentCommentId: PropTypes.number,
   onFocusedRendered: PropTypes.func.isRequired,
+  onOpenNewComments: PropTypes.func.isRequired,
 };
 const defaultProps = {
   currentCommentId: null,
@@ -21,11 +22,16 @@ class CommentsTree extends Component {
       this.props.onFocusedRendered();
     }
   }
+
+  onOpenNewComments = () =>
+    this.props.onOpenNewComments(this.props.currentCommentId);
+
   render() {
     const currentComments = this.props.comments.allIds.map(id => this.props.comments.byId[id])
       .filter(c => c.parentId === this.props.currentCommentId);
+    const hiddenCount = currentComments.filter(c => c.hidden).length;
     if (currentComments.length === 0) return null;
-    const listOfComments = currentComments.map(comment =>
+    const listOfComments = currentComments.filter(c => !c.hidden).map(comment =>
       (
         <CommentNode
           key={comment.id}
@@ -40,12 +46,30 @@ class CommentsTree extends Component {
             comments={this.props.comments}
             currentCommentId={comment.id}
             onFocusedRendered={this.props.onFocusedRendered}
+            onOpenNewComments={this.onOpenNewComments}
           />
         </CommentNode>
       ));
     return (
       <Comment.Group threaded={this.props.currentCommentId === null}>
         {listOfComments}
+        {hiddenCount > 0 &&
+          <Comment>
+            <Comment.Content>
+              <Comment.Author
+                as="a"
+                onClick={
+                  this.onOpenNewComments
+                }
+              >
+                {hiddenCount > 1
+                  ? `${hiddenCount} new comments`
+                  : '1 new comment'
+                }
+              </Comment.Author>
+            </Comment.Content>
+          </Comment>
+        }
       </Comment.Group>
     );
   }

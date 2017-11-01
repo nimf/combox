@@ -26,6 +26,14 @@ const fillComments = comments =>
     allIds: comments.map(c => c.id),
   });
 
+const openComments = (commentsById, commentId) =>
+  Object.assign(...Object.keys(commentsById).map(id => (
+    {
+      [id]: commentsById[id].parentId === commentId
+        ? { ...commentsById[id], hidden: false }
+        : commentsById[id],
+    })));
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'SUBJECT_INFO_LOADED':
@@ -53,7 +61,7 @@ export default function (state = initialState, action) {
         comments: {
           ...state.comments,
           byId: {
-            ...state.comments.byId,
+            ...openComments(state.comments.byId, action.comment.parentId),
             [action.comment.id]: action.comment,
           },
           allIds: [...state.comments.allIds, action.comment.id],
@@ -67,7 +75,10 @@ export default function (state = initialState, action) {
           ...state.comments,
           byId: {
             ...state.comments.byId,
-            [action.comment.id]: action.comment,
+            [action.comment.id]: {
+              ...action.comment,
+              hidden: true,
+            },
           },
           allIds: [...state.comments.allIds, action.comment.id],
         },
@@ -79,6 +90,14 @@ export default function (state = initialState, action) {
           ...state.comments,
           focusedId: null,
         },
+      };
+    case 'OPEN_NEW_COMMENTS':
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          byId: openComments(state.comments.byId, action.commentId),
+        }
       };
     default:
       return state;
