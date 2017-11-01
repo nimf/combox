@@ -12,6 +12,7 @@
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "scroll-behaviour": "^0.3.4",
     "semantic-ui-react": "^0.75.1"
   },
   "devDependencies": {

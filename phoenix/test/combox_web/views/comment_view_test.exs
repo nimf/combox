@@ -10,12 +10,13 @@ defmodule ComboxWeb.CommentViewTest do
     assert Phoenix.View.render_one(comment, CommentView, "comment.json") ==
       %{
         id: comment.id,
-        inserted_at: (comment.inserted_at |> NaiveDateTime.to_iso8601) <> "Z",
+        createdAt: (comment.inserted_at |> NaiveDateTime.to_iso8601) <> "Z",
         message: comment.message,
-        name: comment.name,
+        isGuest: true,
+        authorName: comment.name,
         votes: comment.votes_balance,
-        user_id: comment.user_id,
-        parent_id: comment.parent_id
+        userId: comment.user_id,
+        parentId: comment.parent_id
       }
   end
 
@@ -27,12 +28,13 @@ defmodule ComboxWeb.CommentViewTest do
     assert Phoenix.View.render_one(child, CommentView, "comment.json") ==
       %{
         id: child.id,
-        inserted_at: (child.inserted_at |> NaiveDateTime.to_iso8601) <> "Z",
+        createdAt: (child.inserted_at |> NaiveDateTime.to_iso8601) <> "Z",
         message: child.message,
-        name: child.name,
+        isGuest: true,
+        authorName: child.name,
         votes: child.votes_balance,
-        user_id: child.user_id,
-        parent_id: comment.id
+        userId: child.user_id,
+        parentId: comment.id
       }
   end
 end

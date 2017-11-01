@@ -12,6 +12,10 @@ function connectToSocket(dispatch) {
   socket.connect();
   const channel = socket.channel(CHANNEL_TOPIC);
 
+  channel.on('new_comment', (data) => {
+    dispatch({ type: 'NEW_COMMENT', comment: data.comment });
+  });
+
   channel.join().receive('ok', (response) => {
     dispatch({ type: 'CONNECT_SUCCESSFUL', channel });
     dispatch({ type: 'SUBJECT_INFO_LOADED', response });

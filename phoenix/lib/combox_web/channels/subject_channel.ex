@@ -12,7 +12,7 @@ defmodule ComboxWeb.SubjectChannel do
         :ok,
         %{
           subject: %{id: subject.id, comments_count: subject.comments_count},
-          comments: Phoenix.View.render_many(
+          comments: View.render_many(
             Comment
             |> where([c], c.subject_id == ^subject.id)
             |> order_by([asc: :inserted_at, asc: :id])
@@ -33,8 +33,10 @@ defmodule ComboxWeb.SubjectChannel do
       |> Comment.changeset(params)
 
     case Repo.insert(changeset) do
-      {:ok, _message} ->
-        {:reply, :ok, socket}
+      {:ok, comment} ->
+        comment_json = View.render_one(comment, CommentView, "comment.json")
+        broadcast_from! socket, "new_comment", %{comment: comment_json}
+        {:reply, {:ok, %{comment: comment_json}}, socket}
       {:error, changeset} ->
         {:reply, {:error, View.render(
           ChangesetView, "error.json", changeset: changeset

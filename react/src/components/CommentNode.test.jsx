@@ -18,6 +18,7 @@ const renderComment = comment =>
     <CommentsTree
       comments={commentsFixture}
       currentCommentId={comment.id}
+      onFocusedRendered={() => {}}
     />
   </CommentNode>).toJSON();
 

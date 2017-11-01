@@ -10,18 +10,20 @@ const propTypes = {
   isGuest: PropTypes.bool.isRequired,
   createdAt: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
+  fresh: PropTypes.bool,
   children: PropTypes.node,
 };
 const defaultProps = {
   avatarHash: '00000000000000000000000000000000',
+  fresh: false,
   children: null,
 };
 
 function CommentNode({
-  id, authorName, avatarHash, isGuest, createdAt, message, children,
+  id, authorName, avatarHash, isGuest, createdAt, message, fresh, children,
 }) {
   return (
-    <Comment>
+    <Comment id={`comment-${id}`} className={fresh ? 'fresh' : ''}>
       <Comment.Avatar
         as="a"
         src={`https://www.gravatar.com/avatar/${avatarHash}?s=100`}

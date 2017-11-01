@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
+import 'scroll-behaviour/polyfill';
 import { connectToChannel } from './actions/channel';
-import { saveDraft, postComment } from './actions/subject';
+import { saveDraft, postComment, focusComment } from './actions/subject';
 import CommentBox from './components/CommentBox';
 import CommentsCount from './components/CommentsCount';
 import CommentsTree from './components/CommentsTree';
@@ -13,6 +14,7 @@ const propTypes = {
   connectToChannel: PropTypes.func.isRequired,
   saveDraft: PropTypes.func.isRequired,
   postComment: PropTypes.func.isRequired,
+  focusComment: PropTypes.func.isRequired,
   channelConnected: PropTypes.bool.isRequired,
   displayName: PropTypes.string,
   channel: PropTypes.object,
@@ -44,6 +46,10 @@ export class App extends Component {
     this.props.saveDraft(event.target.value);
   }
 
+  onFocusedRendered = () => {
+    this.props.focusComment(this.props.comments.focusedId);
+  }
+
   render() {
     return (
       <div className="App">
@@ -55,7 +61,10 @@ export class App extends Component {
             onChange={this.onSaveDraft}
             onSubmit={this.onPostComment}
           />
-          <CommentsTree comments={this.props.comments} />
+          <CommentsTree
+            comments={this.props.comments}
+            onFocusedRendered={this.onFocusedRendered}
+          />
         </Segment>
       </div>
     );
@@ -73,5 +82,7 @@ export default connect(
     displayName: state.user.displayName,
     comments: state.subject.comments,
   }),
-  { connectToChannel, saveDraft, postComment },
+  {
+    connectToChannel, saveDraft, postComment, focusComment,
+  },
 )(App);

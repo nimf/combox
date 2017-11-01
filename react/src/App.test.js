@@ -12,6 +12,7 @@ test('App renders correctly', () => {
     connectToChannel={() => {}}
     saveDraft={() => {}}
     postComment={() => {}}
+    focusComment={() => {}}
     channelConnected={false}
     comments={commentsFixture}
   />).toJSON();
@@ -26,6 +27,7 @@ describe('App Shallow Render', () => {
       connectToChannel={() => {}}
       saveDraft={() => {}}
       postComment={() => {}}
+      focusComment={() => {}}
       channelConnected={false}
       comments={{ byId: {}, allIds: [] }}
     />);

@@ -5,6 +5,7 @@ const initialState = {
   comments: {
     byId: {},
     allIds: [],
+    focusedId: null,
   },
 };
 
@@ -19,16 +20,9 @@ const clearDraft = id =>
 
 const fillComments = comments =>
   ({
-    byId: Object.assign(...comments.map(c => ({
-      [c.id]: {
-        id: c.id,
-        authorName: c.name,
-        isGuest: true,
-        createdAt: c.inserted_at,
-        message: c.message,
-        parentId: c.parent_id,
-      },
-    }))),
+    byId: comments.length > 0 ? Object.assign(...comments.map(c => ({
+      [c.id]: c,
+    }))) : {},
     allIds: comments.map(c => c.id),
   });
 
@@ -40,7 +34,10 @@ export default function (state = initialState, action) {
         id: action.response.subject.id,
         commentsCount: action.response.subject.comments_count,
         draftComment: getDraft(action.response.subject.id),
-        comments: fillComments(action.response.comments),
+        comments: {
+          ...state.comments,
+          ...fillComments(action.response.comments),
+        },
       };
     case 'SAVE_DRAFT':
       saveDraft(state.id, action.text);
@@ -48,11 +45,40 @@ export default function (state = initialState, action) {
         ...state,
         draftComment: action.text,
       };
-    case 'CLEAR_DRAFT':
+    case 'NEW_OWN_COMMENT':
       clearDraft(state.id);
       return {
         ...state,
         draftComment: '',
+        comments: {
+          ...state.comments,
+          byId: {
+            ...state.comments.byId,
+            [action.comment.id]: action.comment,
+          },
+          allIds: [...state.comments.allIds, action.comment.id],
+          focusedId: action.comment.id,
+        },
+      };
+    case 'NEW_COMMENT':
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          byId: {
+            ...state.comments.byId,
+            [action.comment.id]: action.comment,
+          },
+          allIds: [...state.comments.allIds, action.comment.id],
+        },
+      };
+    case 'CLEAR_COMMENT_FOCUS':
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          focusedId: null,
+        },
       };
     default:
       return state;

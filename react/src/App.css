@@ -9,3 +9,35 @@
   padding: .6em .833em .4em;
   margin-left: .8em;
 }
+
+@-webkit-keyframes yellow-fade {
+  from {
+    background: #fe3;
+  }
+  to {
+    background: #fff;
+  }
+}
+@-moz-keyframes yellow-fade {
+  from {
+    background: #fe3;
+  }
+  to {
+    background: #fff;
+  }
+}
+@keyframes yellow-fade {
+  from {
+    background: #fe3;
+  }
+  to {
+    background: #fff;
+  }
+}
+
+.fresh {
+  -webkit-animation: yellow-fade 1s ease-in-out 0s;
+  -moz-animation: yellow-fade 1s ease-in-out 0s;
+  -o-animation: yellow-fade 1s ease-in-out 0s;
+  animation: yellow-fade 1s ease-in-out 0s;
+}

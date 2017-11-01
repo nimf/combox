@@ -7,6 +7,7 @@ describe('CommentsTree renders', () => {
   test('renders root comments and below', () => {
     const tree = renderer.create(<CommentsTree
       comments={commentsFixture}
+      onFocusedRendered={() => {}}
     />).toJSON();
     expect(tree).toMatchSnapshot();
   });

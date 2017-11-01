@@ -56,3 +56,13 @@ On the react side I have added comments to a subject state and I fill it when we
 Since we will have threaded comments, I created CommentsTree and CommentNode components.
 CommentNode will render a comment itself.
 CommentsTree will render all comments for some parent comment (or root comments). It will render each comment as CommentNode with CommentsTree for a comment as a child.
+
+_October 31, 2017_
+
+Great, now we see comments when page loads. But we don't see our newly added comment or comments from other users added after page is loaded. Let's fix that - we will broadcast new comments to all connected users.
+
+I reconsidered JSON rendering of comments. If they will be more like we require them to be in redux store, we will have less transformation code.
+
+We will push new comment to the connection posting it and to other connections differently, because we need to show our own comment immediately and other comments only as a hint like '1 new comment'. So we push new comment in the reply to a `post_comment` event and broadcast it to all other connections as `new_comment` event.
+
+I have also added scrolling to and comment highlighting after posting.

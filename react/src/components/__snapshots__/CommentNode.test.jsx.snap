@@ -3,6 +3,7 @@
 exports[`CommentNode renders renders comment with children 1`] = `
 <div
   className="comment"
+  id="comment-1"
 >
   <a
     className="avatar"
@@ -58,6 +59,7 @@ exports[`CommentNode renders renders comment with children 1`] = `
   >
     <div
       className="comment"
+      id="comment-2"
     >
       <a
         className="avatar"
@@ -116,6 +118,7 @@ exports[`CommentNode renders renders comment with children 1`] = `
 exports[`CommentNode renders renders comment without children 1`] = `
 <div
   className="comment"
+  id="comment-3"
 >
   <a
     className="avatar"
