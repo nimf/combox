@@ -1,6 +1,7 @@
 import { Socket } from 'phoenix';
 
-const WEBSOCKET_URL = 'ws://localhost:3000/socket';
+const WEBSOCKET_URL =
+  `ws://${window.location.hostname}:${window.location.port}/socket`;
 // TODO: Subject url must be received from query string
 const CHANNEL_TOPIC = 'subject:some.url/articles/1';
 
