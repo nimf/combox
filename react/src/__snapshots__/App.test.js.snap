@@ -104,7 +104,12 @@ exports[`App renders correctly 1`] = `
           <div
             className="actions"
           >
-            Reply
+            <a
+              className=""
+              onClick={[Function]}
+            >
+              Reply
+            </a>
           </div>
         </div>
         <div
@@ -160,7 +165,12 @@ exports[`App renders correctly 1`] = `
               <div
                 className="actions"
               >
-                Reply
+                <a
+                  className=""
+                  onClick={[Function]}
+                >
+                  Reply
+                </a>
               </div>
             </div>
           </div>
@@ -216,7 +226,12 @@ exports[`App renders correctly 1`] = `
           <div
             className="actions"
           >
-            Reply
+            <a
+              className=""
+              onClick={[Function]}
+            >
+              Reply
+            </a>
           </div>
         </div>
       </div>

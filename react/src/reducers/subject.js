@@ -26,13 +26,42 @@ const fillComments = comments =>
     allIds: comments.map(c => c.id),
   });
 
-const openComments = (commentsById, commentId) =>
-  Object.assign(...Object.keys(commentsById).map(id => (
+const openComments = (commentsById, commentId) => {
+  const commentIds = Object.keys(commentsById);
+  if (commentIds.length === 0) return {};
+  return Object.assign(...commentIds.map(id => (
     {
       [id]: commentsById[id].parentId === commentId
         ? { ...commentsById[id], hidden: false }
         : commentsById[id],
     })));
+};
+
+const toggleReply = (commentsById, commentId) => {
+  const stringId = commentId.toString();
+  return Object.assign(...Object.keys(commentsById).map(id => (
+    {
+      [id]: id === stringId
+        ? { ...commentsById[id], replyOpened: !commentsById[id].replyOpened }
+        : commentsById[id],
+    })));
+};
+
+const setReply = (commentsById, commentId, text) => {
+  const stringId = commentId.toString();
+  return Object.assign(...Object.keys(commentsById).map(id => (
+    {
+      [id]: id === stringId
+        ? { ...commentsById[id], replyText: text }
+        : commentsById[id],
+    })));
+};
+
+const clearReply = (commentsById, commentId) => {
+  return commentId === null
+    ? commentsById
+    : toggleReply(setReply(commentsById, commentId, ''), commentId);
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -61,7 +90,10 @@ export default function (state = initialState, action) {
         comments: {
           ...state.comments,
           byId: {
-            ...openComments(state.comments.byId, action.comment.parentId),
+            ...clearReply(
+              openComments(state.comments.byId, action.comment.parentId),
+              action.comment.parentId,
+            ),
             [action.comment.id]: action.comment,
           },
           allIds: [...state.comments.allIds, action.comment.id],
@@ -97,7 +129,23 @@ export default function (state = initialState, action) {
         comments: {
           ...state.comments,
           byId: openComments(state.comments.byId, action.commentId),
-        }
+        },
+      };
+    case 'TOGGLE_REPLY':
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          byId: toggleReply(state.comments.byId, action.commentId),
+        },
+      };
+    case 'REPLY_CHANGED':
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          byId: setReply(state.comments.byId, action.commentId, action.text),
+        },
       };
     default:
       return state;

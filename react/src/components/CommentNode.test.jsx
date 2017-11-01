@@ -9,17 +9,19 @@ const commentWithChild = commentsFixture.byId[1];
 
 const renderComment = comment =>
   renderer.create(<CommentNode
-    id={comment.id}
-    authorName={comment.authorName}
-    isGuest={comment.isGuest}
-    createdAt={comment.createdAt}
-    message={comment.message}
+    comment={comment}
+    onToggleReply={() => {}}
+    onReplyChange={() => {}}
+    onReply={() => {}}
   >
     <CommentsTree
       comments={commentsFixture}
       currentCommentId={comment.id}
       onFocusedRendered={() => {}}
       onOpenNewComments={() => {}}
+      onToggleReply={() => {}}
+      onReplyChange={() => {}}
+      onReply={() => {}}
     />
   </CommentNode>).toJSON();
 

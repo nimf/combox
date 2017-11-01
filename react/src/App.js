@@ -5,7 +5,8 @@ import { Segment } from 'semantic-ui-react';
 import 'scroll-behaviour/polyfill';
 import { connectToChannel } from './actions/channel';
 import {
-  saveDraft, postComment, focusComment, openNewComments,
+  saveDraft, postComment, focusComment, openNewComments, toggleReply,
+  replyChanged, reply,
 } from './actions/subject';
 import CommentBox from './components/CommentBox';
 import CommentsCount from './components/CommentsCount';
@@ -19,6 +20,9 @@ const propTypes = {
   focusComment: PropTypes.func.isRequired,
   openNewComments: PropTypes.func.isRequired,
   channelConnected: PropTypes.bool.isRequired,
+  toggleReply: PropTypes.func.isRequired,
+  replyChanged: PropTypes.func.isRequired,
+  reply: PropTypes.func.isRequired,
   displayName: PropTypes.string,
   channel: PropTypes.object,
   commentsCount: PropTypes.number,
@@ -57,6 +61,18 @@ export class App extends Component {
     this.props.openNewComments(commentId);
   }
 
+  onToggleReply = (commentId) => {
+    this.props.toggleReply(commentId);
+  }
+
+  onReplyChange = (commentId, event) => {
+    this.props.replyChanged(commentId, event.target.value);
+  }
+
+  onReply = (commentId) => {
+    this.props.reply(commentId);
+  }
+
   render() {
     return (
       <div className="App">
@@ -72,6 +88,9 @@ export class App extends Component {
             comments={this.props.comments}
             onFocusedRendered={this.onFocusedRendered}
             onOpenNewComments={this.onOpenNewComments}
+            onToggleReply={this.onToggleReply}
+            onReplyChange={this.onReplyChange}
+            onReply={this.onReply}
           />
         </Segment>
       </div>
@@ -91,6 +110,13 @@ export default connect(
     comments: state.subject.comments,
   }),
   {
-    connectToChannel, saveDraft, postComment, focusComment, openNewComments,
+    connectToChannel,
+    saveDraft,
+    postComment,
+    focusComment,
+    openNewComments,
+    toggleReply,
+    replyChanged,
+    reply,
   },
 )(App);

@@ -70,3 +70,10 @@ I have also added scrolling to and comment highlighting after posting.
 Now we see our own comment after posting and comments posted from other sessions. But all are displayed instantly. Let's add a hint for new comments posted by others.
 
 We mark all comments received with `new_comment` event as hidden. Then in CommentsTree we hide them and count them. After the last visible comment we render a hint displaying new comments count. We provide an action `OPEN_NEW_COMMENTS` which is dispatched when user clicks the hint. Then we unhide all comments in that thread. We also must unhide all hidden comments in the thread when posting a new comment to that thread succeeds, thus we changed `NEW_OWN_COMMENT` reducer as well.
+
+_November 1, 2017_
+
+Now we need to make our Reply buttons work. I've added reply form to CommentNode. And set up Reply button to toggle the form. I also added callbacks to update reply text and post a reply.
+And when posting a reply comment succeeds we clear reply form and hide it in `NEW_OWN_COMMENT` reducer.
+
+On the back end, we check parent_id parameter and verify that the Comment exists and belongs to the same Subject.

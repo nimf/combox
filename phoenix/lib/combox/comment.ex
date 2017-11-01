@@ -23,5 +23,6 @@ defmodule Combox.Comment do
     |> cast(attrs, [:message, :name, :email, :votes_balance])
     |> validate_required([:message, :subject_id])
     |> assoc_constraint(:subject)
+    |> assoc_constraint(:parent)
   end
 end

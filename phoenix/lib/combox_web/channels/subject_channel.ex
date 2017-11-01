@@ -4,6 +4,7 @@ defmodule ComboxWeb.SubjectChannel do
   alias Combox.{Repo, Subject, Comment}
   alias ComboxWeb.{ChangesetView, CommentView}
   import Ecto.Query, only: [where: 3, order_by: 2]
+  import Ecto.Changeset, only: [put_change: 3]
 
   def join("subject:" <> subject_url, _payload, socket) do
     case Repo.get_by(Subject, url: subject_url) do
@@ -27,10 +28,22 @@ defmodule ComboxWeb.SubjectChannel do
   end
 
   def handle_in("post_comment", params, socket) do
+    parent_id =
+      case params["parent_id"] do
+        nil -> nil
+        parent_id ->
+          parent = Repo.get!(Comment, parent_id)
+          if (parent.subject_id == socket.assigns.subject.id) do
+            parent.id
+          else
+            nil
+          end
+      end
     changeset =
       socket.assigns.subject
       |> Ecto.build_assoc(:comments, user_id: socket.assigns[:user_id])
       |> Comment.changeset(params)
+      |> put_change(:parent_id, parent_id)
 
     case Repo.insert(changeset) do
       {:ok, comment} ->

@@ -14,6 +14,9 @@ test('App renders correctly', () => {
     postComment={() => {}}
     openNewComments={() => {}}
     focusComment={() => {}}
+    toggleReply={() => {}}
+    replyChanged={() => {}}
+    reply={() => {}}
     channelConnected={false}
     comments={commentsFixture}
   />).toJSON();
@@ -30,6 +33,9 @@ describe('App Shallow Render', () => {
       postComment={() => {}}
       openNewComments={() => {}}
       focusComment={() => {}}
+      toggleReply={() => {}}
+      replyChanged={() => {}}
+      reply={() => {}}
       channelConnected={false}
       comments={{ byId: {}, allIds: [] }}
     />);

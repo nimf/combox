@@ -9,6 +9,9 @@ describe('CommentsTree renders', () => {
       comments={commentsFixture}
       onFocusedRendered={() => {}}
       onOpenNewComments={() => {}}
+      onToggleReply={() => {}}
+      onReplyChange={() => {}}
+      onReply={() => {}}
     />).toJSON();
     expect(tree).toMatchSnapshot();
   });

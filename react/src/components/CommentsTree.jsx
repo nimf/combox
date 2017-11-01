@@ -8,6 +8,9 @@ const propTypes = {
   currentCommentId: PropTypes.number,
   onFocusedRendered: PropTypes.func.isRequired,
   onOpenNewComments: PropTypes.func.isRequired,
+  onToggleReply: PropTypes.func.isRequired,
+  onReplyChange: PropTypes.func.isRequired,
+  onReply: PropTypes.func.isRequired,
 };
 const defaultProps = {
   currentCommentId: null,
@@ -26,6 +29,15 @@ class CommentsTree extends Component {
   onOpenNewComments = () =>
     this.props.onOpenNewComments(this.props.currentCommentId);
 
+  onToggleReply = commentId =>
+    () => this.props.onToggleReply(commentId);
+
+  onReplyChange = commentId =>
+    event => this.props.onReplyChange(commentId, event);
+
+  onReply = commentId =>
+    () => this.props.onReply(commentId);
+
   render() {
     const currentComments = this.props.comments.allIds.map(id => this.props.comments.byId[id])
       .filter(c => c.parentId === this.props.currentCommentId);
@@ -35,18 +47,20 @@ class CommentsTree extends Component {
       (
         <CommentNode
           key={comment.id}
-          id={comment.id}
-          authorName={comment.authorName}
-          isGuest={comment.isGuest}
-          createdAt={comment.createdAt}
-          message={comment.message}
+          comment={comment}
           fresh={this.props.comments.focusedId === comment.id}
+          onToggleReply={this.onToggleReply(comment.id)}
+          onReplyChange={this.onReplyChange(comment.id)}
+          onReply={this.onReply(comment.id)}
         >
           <CommentsTree
             comments={this.props.comments}
             currentCommentId={comment.id}
             onFocusedRendered={this.props.onFocusedRendered}
-            onOpenNewComments={this.onOpenNewComments}
+            onOpenNewComments={this.props.onOpenNewComments}
+            onToggleReply={this.props.onToggleReply}
+            onReplyChange={this.props.onReplyChange}
+            onReply={this.props.onReply}
           />
         </CommentNode>
       ));

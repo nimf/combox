@@ -51,7 +51,12 @@ exports[`CommentNode renders renders comment with children 1`] = `
     <div
       className="actions"
     >
-      Reply
+      <a
+        className=""
+        onClick={[Function]}
+      >
+        Reply
+      </a>
     </div>
   </div>
   <div
@@ -107,7 +112,12 @@ exports[`CommentNode renders renders comment with children 1`] = `
         <div
           className="actions"
         >
-          Reply
+          <a
+            className=""
+            onClick={[Function]}
+          >
+            Reply
+          </a>
         </div>
       </div>
     </div>
@@ -166,7 +176,12 @@ exports[`CommentNode renders renders comment without children 1`] = `
     <div
       className="actions"
     >
-      Reply
+      <a
+        className=""
+        onClick={[Function]}
+      >
+        Reply
+      </a>
     </div>
   </div>
 </div>
